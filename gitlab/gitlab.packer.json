@@ -1,0 +1,29 @@
+{
+	"variables": {
+		"host_url": "{{env `HOST_URL`}}"
+	},
+
+	"builders": [{
+		"type": "docker",
+		"image": "debian:jessie",
+		"commit": "true",
+		"changes": [
+			"EXPOSE 80 22"
+		]
+	},{
+		"type": "lxd",
+		"image": "images:debian/jessie"
+	}],
+
+	"provisioners": [{
+		"type": "shell",
+		"script": "install-gitlab-debian.sh",
+		"environment_vars": [
+			"HOST_URL={{user `host_url`}}"
+		]
+	}],
+
+	"post-processors": [{
+		"type": "checksum"
+	}]
+}

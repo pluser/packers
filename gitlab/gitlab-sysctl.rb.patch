@@ -1,0 +1,32 @@
+--- a      2017-12-28 05:19:43.398845668 +0000
++++ b       2017-12-28 05:20:25.748118700 +0000
+@@ -31,11 +31,11 @@
+
+   conf_name = "90-omnibus-gitlab-#{new_resource.name}.conf"
+
+-  file "create /opt/gitlab/embedded/etc/#{conf_name} #{new_resource.name}" do
+-    path "/opt/gitlab/embedded/etc/#{conf_name}"
+-    content "#{new_resource.name} = #{value}\n"
+-    notifies :run, "execute[load sysctl conf #{new_resource.name}]", :immediately
+-  end
++#  file "create /opt/gitlab/embedded/etc/#{conf_name} #{new_resource.name}" do
++#    path "/opt/gitlab/embedded/etc/#{conf_name}"
++#    content "#{new_resource.name} = #{value}\n"
++#    notifies :run, "execute[load sysctl conf #{new_resource.name}]", :immediately
++#  end
+
+   link "/etc/sysctl.d/#{conf_name}" do
+     to "/opt/gitlab/embedded/etc/#{conf_name}"
+@@ -56,8 +56,8 @@
+   end
+
+   # Load the settings right away
+-  execute "load sysctl conf #{new_resource.name}" do
+-    command "cat /etc/sysctl.conf /etc/sysctl.d/*.conf  | sysctl -e -p -"
+-    action :nothing
+-  end
++#  execute "load sysctl conf #{new_resource.name}" do
++#    command "cat /etc/sysctl.conf /etc/sysctl.d/*.conf  | sysctl -e -p -"
++#    action :nothing
++#  end
+ end
