@@ -1,0 +1,19 @@
+{
+	"builders": [
+		{
+			"type": "lxd",
+			"name": "gitlab-runner",
+			"image": "images:debian/stretch",
+			"publish_properties": {
+				"description": "GitLab CI runner with docker"
+			}
+		}
+	],
+
+	"provisioners": [
+		{
+			"type": "shell",
+			"script": "setup-gitlab-runner.sh"
+		}
+	]
+}
